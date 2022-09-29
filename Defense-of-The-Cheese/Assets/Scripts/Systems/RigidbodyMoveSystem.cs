@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMoveSystem : BaseSystem, IFixedUpdatableSystem
+public class RigidbodyMoveSystem : BaseSystem, IFixedUpdatableSystem
 {
     public void FixedUpdate()
     {
@@ -20,10 +18,24 @@ public class PlayerMoveSystem : BaseSystem, IFixedUpdatableSystem
 
     private void Move(DirectionComponent directionComponent, MoveComponent move)
     {
-        var direction = directionComponent.Direction;
+        var localDirection = directionComponent.Direction;
 
         var target = move.Target;
         var speed = move.Speed;
+
+        var direction = new Vector2();
+
+        if (localDirection == new Vector2(0, 0))
+        {
+            direction = new Vector2(0, 0);
+        }
+        else
+        {
+            var localAngel = localDirection.DirectionToAngel();
+            var transformAngel = target.transform.rotation.eulerAngles.z;
+
+            direction = (localAngel + transformAngel).DegreeInVector2D();
+        }
 
         if (target.TryGetComponent(out Rigidbody2D rigidbody))
         {
@@ -31,6 +43,7 @@ public class PlayerMoveSystem : BaseSystem, IFixedUpdatableSystem
         }
         else
         {
+            Debug.LogError(Actor.name + " does not have a Rigidbody2D component!");
             return;
         }
     }

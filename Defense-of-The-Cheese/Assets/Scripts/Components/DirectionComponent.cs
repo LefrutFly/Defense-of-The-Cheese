@@ -3,5 +3,5 @@ using UnityEngine;
 [System.Serializable]
 public class DirectionComponent
 {
-    public Vector3 Direction;
+    public Vector2 Direction;
 }

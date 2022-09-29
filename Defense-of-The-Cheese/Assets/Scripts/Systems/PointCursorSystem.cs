@@ -15,6 +15,6 @@ public class PointCursorSystem : BaseSystem, IUpdatableSystem
 
     private void PointToCursor(GameObject view)
     {
-        view.Look(Camera.main.ScreenToWorldPoint(Input.mousePosition));      
+        view.Look2D(Camera.main.ScreenToWorldPoint(Input.mousePosition));      
     }
 }
