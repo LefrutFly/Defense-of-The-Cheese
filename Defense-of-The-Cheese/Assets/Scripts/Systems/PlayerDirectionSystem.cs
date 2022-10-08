@@ -1,9 +1,15 @@
 ﻿using UnityEngine;
+using Photon.Pun;
 
 public class PlayerDirectionSystem : BaseSystem, IUpdatableSystem
 {
     public void Update()
     {
+        if(Actor.TryGetComponent(out PhotonView photonView))
+        {
+            if (photonView.IsMine == false) return;
+        }
+                 
         if (IsActive == false) return;
 
         if (Providers.Has<DirectionProvider>() == false ||

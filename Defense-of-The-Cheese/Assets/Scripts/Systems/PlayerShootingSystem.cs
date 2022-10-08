@@ -1,9 +1,15 @@
-﻿using UnityEngine;
+﻿using Photon.Pun;
+using UnityEngine;
 
 public class PlayerShootingSystem : BaseSystem, IUpdatableSystem
 {
     public void Update()
     {
+        if (Actor.TryGetComponent(out PhotonView photonView))
+        {
+            if (photonView.IsMine == false) return;
+        }
+
         if (IsActive == false) return;
 
         if (Providers.Has<PlayerShootingProvider>() == false) return;
@@ -39,7 +45,7 @@ public class PlayerShootingSystem : BaseSystem, IUpdatableSystem
         var rotation = component.SpawnPosition.transform.rotation;
         var lifeTime = component.bulletLifeTime;
 
-        Bullet bullet = GameObject.Instantiate(bulletPrefab.gameObject, position, rotation).GetComponent<Bullet>();
+        Bullet bullet = PhotonNetwork.Instantiate(bulletPrefab.gameObject.name, position, rotation).GetComponent<Bullet>();
 
         MonoBehaviour.Destroy(bullet.gameObject, lifeTime);
 

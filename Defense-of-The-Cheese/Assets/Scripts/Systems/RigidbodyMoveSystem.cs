@@ -1,9 +1,15 @@
+using Photon.Pun;
 using UnityEngine;
 
 public class RigidbodyMoveSystem : BaseSystem, IFixedUpdatableSystem
 {
     public void FixedUpdate()
     {
+        if (Actor.TryGetComponent(out PhotonView photonView))
+        {
+            if (photonView.IsMine == false) return;
+        }
+
         if (IsActive == false) return;
 
         if (Providers.Has<DirectionProvider>() == false ||
