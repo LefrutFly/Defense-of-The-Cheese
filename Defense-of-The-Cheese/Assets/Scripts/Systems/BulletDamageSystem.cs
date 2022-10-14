@@ -13,7 +13,7 @@ public class BulletDamageSystem : BaseSystem, ITriggableSystem
                 if(Providers.TryGet(out BulletProvider bulletProvider))
                 {
                     var damage = bulletProvider.component.Damage;
-                    health.healthNow -= damage;
+                    health.HealthNow -= damage;
                 }
             }
         }
