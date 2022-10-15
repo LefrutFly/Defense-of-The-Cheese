@@ -4,6 +4,8 @@ public class BulletDamageSystem : BaseSystem, ITriggableSystem
 {
     public void TriggetEnter(Collider2D collision)
     {
+        if (IsActive == false) return;
+
         if(collision.TryGetComponent(out Entity entity))
         {
             if(entity.Providers.TryGet(out HealthProvider healthProvider))

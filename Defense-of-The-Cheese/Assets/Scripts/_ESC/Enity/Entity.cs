@@ -95,6 +95,34 @@ public abstract class Entity : MonoBehaviour
         ClearAllUpdates();
     }
 
+    public void OnSystem<T>() where T : BaseSystem, new()
+    {
+        T system = new T();
+
+        if (systems.Has(system))
+        {
+            systems.Get<T>().IsActive = true;
+        }
+        else
+        {
+            Debug.LogError($"System not found in object {gameObject.name}");
+        }
+    }
+
+    public void OffSystem<T>() where T : BaseSystem, new()
+    {
+        T system = new T();
+
+        if (systems.Has(system))
+        {
+            systems.Get<T>().IsActive = false;
+        }
+        else
+        {
+            Debug.LogError($"System not found in object {gameObject.name}");
+        }
+    }
+
     public void AddSystem(BaseSystem system)
     {
         if (system == null) return;
