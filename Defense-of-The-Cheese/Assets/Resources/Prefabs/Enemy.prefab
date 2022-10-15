@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 6178393178503647637}
   - component: {fileID: 3800916993263355761}
   - component: {fileID: 7892093383214323733}
+  - component: {fileID: 817775645307157903}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -216,6 +217,7 @@ MonoBehaviour:
   - {fileID: 6178393178503647637}
   - {fileID: 3800916993263355761}
   - {fileID: 7892093383214323733}
+  - {fileID: 817775645307157903}
 --- !u!114 &7979376630826093719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,6 +247,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   component:
     Player: {fileID: 0}
+    Tower: {fileID: 0}
+    distanceToTowerForVision: 0
 --- !u!114 &3800916993263355761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,6 +278,20 @@ MonoBehaviour:
   component:
     Target: {fileID: 7979376630826093723}
     Speed: 200
+--- !u!114 &817775645307157903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7979376630826093718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c273da0e98fee2748bbdc20af5fd7cc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  component:
+    view: {fileID: 7979376629809113487}
 --- !u!1 &7979376630921159227
 GameObject:
   m_ObjectHideFlags: 0

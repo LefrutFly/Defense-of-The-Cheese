@@ -4,7 +4,7 @@ public class Player : Entity
     {
         AddSystem(new PlayerDirectionSystem());
         AddSystem(new RigidbodyMoveSystem());
-        AddSystem(new ViewDirectionSystem());
+        AddSystem(new PlayerViewDirectionSystem());
         AddSystem(new PlayerShootingSystem());
         AddSystem(new DeathDestroySystem());
     }
