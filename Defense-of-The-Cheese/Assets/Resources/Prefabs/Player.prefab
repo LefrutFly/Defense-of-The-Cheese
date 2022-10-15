@@ -347,10 +347,10 @@ MonoBehaviour:
   component:
     KeyShoot: 323
     Damage: 10
-    Speed: 500
+    Speed: 1000
     Bullet: {fileID: 7269687096540863848, guid: 71d641f5a7f1124498ee64c5deb27a39, type: 3}
     SpawnPosition: {fileID: 4303915503988276025}
-    bulletLifeTime: 1
+    bulletLifeTime: 2
 --- !u!114 &4303915504840885668
 MonoBehaviour:
   m_ObjectHideFlags: 0

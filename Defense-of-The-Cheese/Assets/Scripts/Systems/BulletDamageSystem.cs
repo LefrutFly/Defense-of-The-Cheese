@@ -6,7 +6,7 @@ public class BulletDamageSystem : BaseSystem, ITriggableSystem
     {
         if (IsActive == false) return;
 
-        if(collision.TryGetComponent(out Entity entity))
+        if(collision.TryGetComponent(out Enemy entity))
         {
             if(entity.Providers.TryGet(out HealthProvider healthProvider))
             {
@@ -18,8 +18,8 @@ public class BulletDamageSystem : BaseSystem, ITriggableSystem
                     health.HealthNow -= damage;
                 }
             }
+            MonoBehaviour.Destroy(Actor.gameObject);
         }
-        MonoBehaviour.Destroy(Actor.gameObject);
     }
 
     public void TriggetExit(Collider2D collision)
