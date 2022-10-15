@@ -54,4 +54,15 @@ public static class Extentions
 
         return direction;
     }
+
+    public static Vector2 FindDirectionPointToPoint(this Vector2 point1, Vector2 point2)
+    {
+        Vector2 direction = new Vector2();
+
+        Vector2 vector = new Vector2(point2.x - point1.x, point2.y - point1.y);
+
+        direction = vector.normalized;
+ 
+        return direction;
+    }
 }
