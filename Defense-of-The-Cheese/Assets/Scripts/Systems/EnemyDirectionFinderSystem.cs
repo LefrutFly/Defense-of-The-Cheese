@@ -13,12 +13,14 @@ public class EnemyDirectionFinderSystem : BaseSystem, IUpdatableSystem
         var directionComponent = Providers.Get<DirectionProvider>().component;
         var enemyComponent = Providers.Get<EnemyProvider>().component;
 
-        var playerPoint = enemyComponent.Player.transform.position;
+        
         var towerPoint = enemyComponent.Tower.transform.position;
         var distance = enemyComponent.distanceToTowerForVision;
 
+        if (enemyComponent.Player == null) return;
+        var playerPoint = enemyComponent.Player.transform.position;
 
-        if(FindDistanceToTarget(towerPoint) <= distance)
+        if (FindDistanceToTarget(towerPoint) <= distance)
         {
             FindDirectionToTarget(directionComponent, towerPoint);
         }

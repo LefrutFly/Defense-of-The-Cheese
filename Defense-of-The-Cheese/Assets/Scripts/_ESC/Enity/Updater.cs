@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+[DefaultExecutionOrder(-999999999)]
 public class Updater : MonoBehaviour
 {
     public static Updater instance;
@@ -15,17 +16,23 @@ public class Updater : MonoBehaviour
 
     private void Update()
     {
-        foreach (var system in updatables)
+        for (int i = 0; i < updatables.Count; i++)
         {
-            system.Update();
+            if(updatables[i] != null)
+            {
+                updatables[i].Update();
+            }
         }
     }
 
     private void FixedUpdate()
     {
-        foreach (var system in fixedUpdatables)
+        for (int i = 0; i < fixedUpdatables.Count; i++)
         {
-            system.FixedUpdate();
+            if (fixedUpdatables[i] != null)
+            {
+                fixedUpdatables[i].FixedUpdate();
+            }
         }
     }
 }

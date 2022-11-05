@@ -38,6 +38,8 @@ public abstract class Entity : MonoBehaviour
         {
             system.Enable();
         }
+
+        AddUpdates();
     }
 
     private void Start()
@@ -46,8 +48,6 @@ public abstract class Entity : MonoBehaviour
         {
             system.Start();
         }
-
-        AddUpdates();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -83,6 +83,8 @@ public abstract class Entity : MonoBehaviour
 
         DisableEvent?.Invoke();
         DisableEvent = null;
+
+        ClearAllUpdates();
     }
 
     private void OnDestroy()

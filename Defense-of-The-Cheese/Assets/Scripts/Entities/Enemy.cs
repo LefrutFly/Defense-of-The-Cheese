@@ -5,7 +5,7 @@ public class Enemy : Entity
         AddSystem(new EnemyDirectionFinderSystem());
         AddSystem(new RigidbodyMoveSystem());
         AddSystem(new ViewDirectionSystem());
-        AddSystem(new EnemtAttackSystem());
+        AddSystem(new EnemyAttackSystem());
         AddSystem(new DeathDestroySystem());
     }
 }
