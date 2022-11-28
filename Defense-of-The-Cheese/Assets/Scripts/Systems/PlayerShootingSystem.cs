@@ -39,6 +39,8 @@ public class PlayerShootingSystem : BaseSystem, IUpdatableSystem
         var rotation = component.SpawnPosition.transform.rotation;
         var lifeTime = component.bulletLifeTime;
 
+        (Actor as Player).Statistics.BulletsNow++;
+
         Bullet bullet = GameObject.Instantiate(bulletPrefab.gameObject, position, rotation).GetComponent<Bullet>();
 
         MonoBehaviour.Destroy(bullet.gameObject, lifeTime);

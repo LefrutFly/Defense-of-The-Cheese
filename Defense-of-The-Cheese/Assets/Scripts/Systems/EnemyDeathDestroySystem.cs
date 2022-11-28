@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class DeathDestroySystem : BaseSystem, IStartableSystem, IDestroySystem
+public class EnemyDeathDestroySystem : BaseSystem, IStartableSystem, IDestroySystem
 {
     public void Start()
     {
@@ -24,6 +24,7 @@ public class DeathDestroySystem : BaseSystem, IStartableSystem, IDestroySystem
 
     private void DestroyActor()
     {
+        (Actor as Enemy).Statistics.KillsNow++;
         MonoBehaviour.Destroy(Actor.gameObject);
     }
 }

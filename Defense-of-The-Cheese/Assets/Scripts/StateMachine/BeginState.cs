@@ -10,6 +10,7 @@ public class BeginState : State
     {
         gameStateMachine = stateMachine as GameStateMachine;
 
+        gameStateMachine.Screens.EnableStartProjectScreen();
         StopTime();
         SetCameraInStartScreen();
         DisablePlayer();
@@ -23,6 +24,7 @@ public class BeginState : State
     {
         PlayTime();
         EnablePlayer();
+        gameStateMachine.Screens.DisableStartProjectScreen();
 
         gameStateMachine.Screens.StartProjectScreen.StartGameButton.onClick.RemoveListener(StartGame);
 

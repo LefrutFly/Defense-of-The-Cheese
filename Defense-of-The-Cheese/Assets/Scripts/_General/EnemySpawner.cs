@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
@@ -12,10 +13,36 @@ public class EnemySpawner : MonoBehaviour
 
     [Inject] private Player player;
     [Inject] private Tower tower;
+    [Inject] public Statistics Statistics;
 
-    private void Awake()
+    private List<Entity> enemies = new List<Entity>();
+    private Coroutine spawner;
+    private bool isLaunching = false;
+
+    public void StopSpawn()
     {
-        StartCoroutine(SpawnWaves());
+        if (spawner != null)
+        {
+            StopCoroutine(spawner);
+            spawner = null;
+        }
+    }
+
+    public void LaunchSpawn()
+    {
+        if (spawner == null)
+        {
+            spawner = StartCoroutine(SpawnWaves());
+        }
+    }
+
+    public void DeleteAllEnemies()
+    {
+        foreach (var enemy in enemies)
+        {
+            Destroy(enemy.gameObject);
+        }
+        enemies.Clear();
     }
 
     private IEnumerator SpawnWaves()
@@ -30,22 +57,29 @@ public class EnemySpawner : MonoBehaviour
 
     private void InstantiateWave()
     {
-        for(int i = 0; i < numberEnemiesInOneWave; i++)
+        for (int i = 0; i < numberEnemiesInOneWave; i++)
         {
             Entity entity = Instantiate
                 (
-                enemyPrefab.gameObject, 
-                GenerateRandomposition(), 
+                enemyPrefab.gameObject,
+                GenerateRandomposition(),
                 Quaternion.identity
                 ).
                 GetComponent<Entity>();
 
-            if(entity.Providers.TryGet(out EnemyProvider enemyProvider))
+            if (entity.Providers.TryGet(out EnemyProvider enemyProvider))
             {
                 enemyProvider.component.Player = player;
                 enemyProvider.component.Tower = tower;
                 enemyProvider.component.distanceToTowerForVision = distanceToTower;
             }
+
+            if (entity is Enemy)
+            {
+                (entity as Enemy).Statistics = Statistics;
+            }
+
+            enemies.Add(entity);
         }
     }
 
@@ -55,7 +89,7 @@ public class EnemySpawner : MonoBehaviour
         float y = 0;
 
         int randSide = Random.Range(0, 4);
-        if (randSide == 0) 
+        if (randSide == 0)
         {
             x = Random.Range(-boxRange, boxRange);
             y = boxRange;
