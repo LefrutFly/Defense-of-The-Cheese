@@ -13,14 +13,8 @@ public class ViewDirectionSystem : BaseSystem, IUpdatableSystem
 
         var view = Providers.Get<ViewProvider>().component.view;
         var direction = Providers.Get<DirectionProvider>().component.Direction;
+        var viewDirection = (Vector2)view.transform.position + direction;
 
-        if(direction.x >= 0)
-        {
-            view.transform.rotation = Quaternion.Euler(0, 0, 0);
-        }
-        else
-        {
-            view.transform.rotation = Quaternion.Euler(0, 180, 0);
-        }
+        view.Look2D(viewDirection);
     }
 }
